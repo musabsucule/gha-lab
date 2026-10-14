@@ -1,0 +1,26 @@
+name: Hello
+
+on:
+  push:
+  workflow_dispatch:        # adds a "Run workflow" button in the UI
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v6
+
+      - name: Show context
+        run: |
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "Branch:       ${{ github.ref_name }}"
+          echo "Commit:       ${{ github.sha }}"
+          echo "Actor:        ${{ github.actor }}"
+
+      - name: Look around the runner
+        run: |
+          uname -a
+          node --version
+          docker --version
+          ls -la
